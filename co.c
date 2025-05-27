@@ -4,9 +4,14 @@
 #include <unistd.h>
 #include <stdatomic.h>
 #include <signal.h>
+#ifdef __linux__
 #include <sys/prctl.h>
 #include <bits/types/sigset_t.h>
 #include <bits/sigaction.h>
+#else
+// macOS includes
+#include <signal.h>
+#endif
 
 void co_init() {
     // TO BE IMPLEMENTED
