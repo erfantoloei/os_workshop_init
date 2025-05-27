@@ -4,10 +4,21 @@
 #include <unistd.h>
 #include <stdatomic.h>
 #include <signal.h>
+#ifdef __linux__
 #include <sys/prctl.h>
+#else
+// macOS includes
+#include <signal.h>
+#endif
+
 
 void get_thread_name(char* name) {
+#ifdef __linux__
     prctl(PR_GET_NAME, name, 0, 0, 0);
+#else
+    // macOS includes
+    // strcpy(name, "macOS");
+#endif
 }
 
 void hello(void *a) {
